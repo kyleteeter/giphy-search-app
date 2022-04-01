@@ -3,15 +3,9 @@ import {
   extendTheme,
   ChakraProvider,
   Box,
-  Grid,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Stack,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from '../ColorModeSwitcher';
-import { FaSearch } from 'react-icons/fa';
-
+import { useState } from "react";
+import { Header } from '../Header';
 
 const layout = {
   width: {
@@ -21,23 +15,21 @@ const layout = {
 
 const theme = extendTheme({ layout })
 
+
 export function App() {
+  const [gifs, setGifs] = useState([]);
+
+  const getGifs = (searchValue) => {
+    console.log('search', searchValue)
+    fetch(`https://api.giphy.com/v1/gifs/search?api_key=JVYjg9uDDbG7MnCkRHJkAFb2psQw5kDW&q=${searchValue}&limit=20`)
+    .then(response => response.json())
+    .then((response) => setGifs(response))
+    .then(console.log('gifs', gifs))
+  }
+
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <Stack spacing={4}>
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents='none'
-                children={<FaSearch color='gray.300' />}
-              />
-              <Input type='tel' placeholder='Search Gifs' />
-            </InputGroup>
-          </Stack>
-        </Grid>
-      </Box>
+        <Header getGifs={getGifs} gifs={gifs} />
     </ChakraProvider>
   );
 }
