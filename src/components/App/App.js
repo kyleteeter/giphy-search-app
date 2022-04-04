@@ -15,7 +15,7 @@ export function App() {
   const [gifs, setGifs] = useState({});
 
   const getGifs = (searchValue) => {
-    console.log("search", searchValue);
+    console.log("search input", searchValue);
     fetch(
       `https://api.giphy.com/v1/gifs/search?api_key=JVYjg9uDDbG7MnCkRHJkAFb2psQw5kDW&q=${searchValue}&limit=20`
     )

@@ -19,9 +19,9 @@ export function Header({ getGifs, gifs, clearResults }) {
     setInputValue(event.target.value);
   };
 
-  const handleSubmit = (input) => {
-    getGifs(input);
-  };
+  // const handleSubmit = () => {
+  //   getGifs(inputValue);
+  // };
 
   const handleReset = (event) => {
     event.preventDefault();
@@ -29,18 +29,19 @@ export function Header({ getGifs, gifs, clearResults }) {
     clearResults();
   };
 
+  const listener = (event) => {
+    if (event.code === "Enter" || event.code === "NumpadEnter") {
+      event.preventDefault();
+      getGifs(inputValue);
+    }
+  };
+
   useEffect(() => {
-    const listener = (event) => {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
-        event.preventDefault();
-        handleSubmit(inputValue);
-      }
-    };
     document.addEventListener("keydown", listener);
     return () => {
       document.removeEventListener("keydown", listener);
     };
-  }, []);
+  }, [listener]);
 
   return (
     <Flex justifyContent={"space-between"} minH='100vh' p={3}>
