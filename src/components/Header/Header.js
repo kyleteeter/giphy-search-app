@@ -11,6 +11,7 @@ import {
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import { useCallback } from "react/cjs/react.production.min";
 
 export function Header({ getGifs, gifs, clearResults }) {
   const [inputValue, setInputValue] = useState("");
@@ -19,9 +20,9 @@ export function Header({ getGifs, gifs, clearResults }) {
     setInputValue(event.target.value);
   };
 
-  // const handleSubmit = () => {
-  //   getGifs(inputValue);
-  // };
+  const handleSubmit = () => {
+    getGifs(inputValue);
+  };
 
   const handleReset = (event) => {
     event.preventDefault();
@@ -29,19 +30,19 @@ export function Header({ getGifs, gifs, clearResults }) {
     clearResults();
   };
 
-  const listener = (event) => {
-    if (event.code === "Enter" || event.code === "NumpadEnter") {
-      event.preventDefault();
-      getGifs(inputValue);
-    }
-  };
-
   useEffect(() => {
+    const listener = (event) => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        event.preventDefault();
+        console.log('inputvalBefore', inputValue)
+        handleSubmit();
+      }
+    };
     document.addEventListener("keydown", listener);
     return () => {
       document.removeEventListener("keydown", listener);
     };
-  }, [listener]);
+  }, [handleSubmit, inputValue]);
 
   return (
     <Flex justifyContent={"space-between"} minH='100vh' p={3}>
