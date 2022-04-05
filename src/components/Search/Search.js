@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Text,
   Input,
@@ -11,17 +10,12 @@ import {
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { useCallback } from "react/cjs/react.production.min";
 
-export function Header({ getGifs, gifs, clearResults }) {
+export function Search({ getGifs, clearResults }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
-  };
-
-  const handleSubmit = () => {
-    getGifs(inputValue);
   };
 
   const handleReset = (event) => {
@@ -34,18 +28,17 @@ export function Header({ getGifs, gifs, clearResults }) {
     const listener = (event) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
         event.preventDefault();
-        console.log('inputvalBefore', inputValue)
-        handleSubmit();
+        getGifs(inputValue)
       }
     };
     document.addEventListener("keydown", listener);
     return () => {
       document.removeEventListener("keydown", listener);
     };
-  }, [handleSubmit, inputValue]);
+  }, [getGifs, inputValue]);
 
   return (
-    <Flex justifyContent={"space-between"} minH='100vh' p={3}>
+    <Flex justifyContent={"space-between"} p={3}>
       <Text fontFamily={"heading"} fontSize='2xl'>
         Giphy App
       </Text>
@@ -72,8 +65,6 @@ export function Header({ getGifs, gifs, clearResults }) {
         </InputGroup>
       </FormControl>
       <ColorModeSwitcher maxW='35%' />
-      {console.log(gifs)}
-      {console.log("input", inputValue)}
     </Flex>
   );
 }

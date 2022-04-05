@@ -1,35 +1,28 @@
-import React from "react";
-import { extendTheme, ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { useState } from "react";
-import { Header } from "../Header";
+import { Results } from "../Results";
+import { Search } from "../Search";
 
-const layout = {
-  width: {
-    60: "60%",
-  },
-};
-
-const theme = extendTheme({ layout });
 
 export function App() {
   const [gifs, setGifs] = useState({});
 
   const getGifs = (searchValue) => {
-    console.log("search input", searchValue);
     fetch(
       `https://api.giphy.com/v1/gifs/search?api_key=JVYjg9uDDbG7MnCkRHJkAFb2psQw5kDW&q=${searchValue}&limit=20`
     )
       .then((response) => response.json())
-      .then((data) => setGifs(data));
+      .then((response) => setGifs(response.data));
   };
 
   const clearResults = () => {
     setGifs({});
-  }
+  };
 
   return (
-    <ChakraProvider theme={theme}>
-      <Header getGifs={getGifs} gifs={gifs} clearResults={clearResults} />
+    <ChakraProvider>
+      <Search getGifs={getGifs} clearResults={clearResults} />
+      {gifs && <Results gifs={gifs} />}
     </ChakraProvider>
   );
 }
