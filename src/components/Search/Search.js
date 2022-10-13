@@ -28,7 +28,7 @@ export function Search({ getGifs, clearResults }) {
     const listener = (event) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
         event.preventDefault();
-        getGifs(inputValue)
+        getGifs(inputValue);
       }
     };
     document.addEventListener("keydown", listener);
@@ -39,24 +39,24 @@ export function Search({ getGifs, clearResults }) {
 
   return (
     <Flex justifyContent={"space-between"} p={3}>
-      <Text fontFamily={"heading"} fontSize='2xl'>
+      <Text fontFamily={"heading"} fontSize="2xl">
         Giphy App
       </Text>
-      <FormControl maxW='60%'>
+      <FormControl maxW="60%">
         <InputGroup>
           <InputLeftElement
-            pointerEvents='none'
-            children={<FaSearch color='gray.300' />}
+            pointerEvents="none"
+            children={<FaSearch color="gray.300" />}
           />
           <Input
-            type='text'
-            placeholder='Search Gifs'
+            type="text"
+            placeholder="Search Gifs"
             value={inputValue}
             onChange={handleChange}
           />
           {inputValue.length ? (
             <InputRightElement
-              children={<FaTimes color='gray.300' />}
+              children={<FaTimes color="gray.300" />}
               onClick={handleReset}
             ></InputRightElement>
           ) : (
@@ -64,7 +64,7 @@ export function Search({ getGifs, clearResults }) {
           )}
         </InputGroup>
       </FormControl>
-      <ColorModeSwitcher maxW='35%' />
+      <ColorModeSwitcher maxW="35%" />
     </Flex>
   );
 }

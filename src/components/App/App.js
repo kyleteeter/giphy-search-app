@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Results } from "../Results";
 import { Search } from "../Search";
 
-
 export function App() {
   const [gifs, setGifs] = useState({});
 
