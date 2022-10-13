@@ -1,4 +1,4 @@
-import { Box, Image, SimpleGrid } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 
 export function Results({ gifs }) {
   return (
@@ -6,20 +6,29 @@ export function Results({ gifs }) {
       padding={10}
       w="100%"
       mx="auto"
-      bg="gray.800"
       sx={{ columnCount: [1, 2, 3, 4, 5], gap: "8px" }}
     >
       {Object.values(gifs).map((gif) => {
+        const stillImage = gif.images["fixed_width_still"].url;
+        const loopGif = gif.images["fixed_width"].url;
         return (
-          <Image
-            key={gif.images.id}
-            w="100%"
-            borderRadius="xl"
-            mb={2}
-            d="inline-block"
-            src={gif.images["original"].url}
-            alt={gif.images.title}
-          />
+          <Box>
+            <Image
+              key={gif.id}
+              w="100%"
+              borderRadius="md"
+              mb={2}
+              d="inline-block"
+              src={stillImage}
+              onMouseOver={(e) => {
+                e.currentTarget.src = loopGif;
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.src = stillImage;
+              }}
+              alt={gif.images.title}
+            />
+          </Box>
         );
       })}
     </Box>

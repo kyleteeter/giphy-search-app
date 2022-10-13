@@ -8,7 +8,7 @@ export function App() {
 
   const getGifs = (searchValue) => {
     fetch(
-      `https://api.giphy.com/v1/gifs/search?api_key=JVYjg9uDDbG7MnCkRHJkAFb2psQw5kDW&q=${searchValue}&limit=20`
+      `https://api.giphy.com/v1/gifs/search?api_key=JVYjg9uDDbG7MnCkRHJkAFb2psQw5kDW&q=${searchValue}&limit=40`
     )
       .then((response) => response.json())
       .then((response) => setGifs(response.data));
