@@ -73,8 +73,7 @@ export function Search({ getGifs, clearResults }) {
           </InputGroup>
           <Button
             colorScheme="gray.300"
-            color={inputValue ? "gray.900" : "gray.300"}
-            variant="outline"
+            variant={inputValue ? "outline" : "solid"}
             onClick={(e) => handleSearch(e)}
           >
             Search
