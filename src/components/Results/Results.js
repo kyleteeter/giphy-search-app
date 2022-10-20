@@ -12,9 +12,8 @@ export function Results({ gifs }) {
         const stillImage = gif.images["fixed_width_still"].url;
         const loopGif = gif.images["fixed_width"].url;
         return (
-          <Box>
+          <Box key={gif.id}>
             <Image
-              key={gif.id}
               w="100%"
               borderRadius="md"
               mb={2}
