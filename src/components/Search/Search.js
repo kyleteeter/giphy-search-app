@@ -28,12 +28,13 @@ export function Search({ getGifs, clearResults }) {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    console.log(inputValue)
     getGifs(inputValue);
   };
 
   useEffect(() => {
     const listener = (e) => {
-      if (e.code === "Enter" || e.code === "NumpadEnter") {
+      if (inputValue && (e.code === "Enter" || e.code === "NumpadEnter")) {
         e.preventDefault();
         getGifs(inputValue);
       }
