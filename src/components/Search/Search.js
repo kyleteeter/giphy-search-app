@@ -28,7 +28,6 @@ export function Search({ getGifs, clearResults }) {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(inputValue)
     getGifs(inputValue);
   };
 
